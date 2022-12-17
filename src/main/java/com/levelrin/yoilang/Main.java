@@ -5,7 +5,7 @@
  * See the details at https://github.com/levelrin/yoi-lang/blob/main/LICENSE
  */
 
-package com.levelrin;
+package com.levelrin.yoilang;
 
 /**
  * Entry point of the application.

@@ -8,4 +8,4 @@
 /**
  * Root package.
  */
-package com.levelrin;
+package com.levelrin.yoilang;
