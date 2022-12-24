@@ -51,4 +51,7 @@
             <property name="violationSuppressXPath" value="//ClassOrInterfaceDeclaration['.*Test']"/>
         </properties>
     </rule>
+
+    <!-- Ignore generated files from Antlr -->
+    <exclude-pattern>.*/generated-src/.*</exclude-pattern>
 </ruleset>

@@ -4,6 +4,7 @@ plugins {
     id 'com.github.spotbugs' version '5.0.9'
     id 'pmd'
     id 'checkstyle'
+    id 'antlr'
 }
 
 group 'com.levelrin'
@@ -15,7 +16,18 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    main {
+        java {
+            // We will generate the parser in this directory using Antlr.
+            // We need to add this directory to the main source set to use the generated classes in our code.
+            srcDirs("$buildDir/generated-src/antlr/main")
+        }
+    }
+}
+
 dependencies {
+    antlr 'org.antlr:antlr4:4.11.1'
     implementation 'net.jcip:jcip-annotations:1.0'
     implementation 'com.github.spotbugs:spotbugs-annotations:4.7.3'
     implementation 'org.jetbrains:annotations:23.0.0'
@@ -155,4 +167,18 @@ jar {
             it.isDirectory() ? it : zipTree(it)
         }
     }
+}
+
+generateGrammarSource {
+    maxHeapSize = '64m'
+    arguments += [
+        '-visitor',
+        '-long-messages',
+        // This will add the package declaration in all generated classes.
+        // Package declaration is required to use the generated classes in our code
+        // because Java doesn't allow importing the classes in the default package.
+        '-package', 'com.levelrin.antlr.generated'
+    ]
+    // Since we will add the package declaration, we must put generated classes in the package folder.
+    outputDirectory = file("$buildDir/generated-src/antlr/main/com/levelin/antlr/generated")
 }

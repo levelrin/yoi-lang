@@ -7,4 +7,7 @@
 <suppressions>
     <!-- Suppress rules for test files. -->
     <suppress files=".*[\\/]src[\\/](test)[\\/]" checks="MethodName"/>
+
+    <!-- Suppress generated files from Antlr -->
+    <suppress files="[\\/]generated-src[\\/]" checks="[a-zA-Z0-9]*"/>
 </suppressions>

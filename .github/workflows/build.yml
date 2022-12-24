@@ -9,7 +9,7 @@ jobs:
       - name: Checkout the source code
         uses: actions/checkout@v3
       - name: Run the Docker container using the openjdk image. The build folder is shared so we can upload the coverage report.
-        run: docker run --name ci -v $(pwd)/build:/usr/local/myapp/build -it -d openjdk:8u332-slim-bullseye /bin/bash
+        run: docker run --name ci -v $(pwd)/build:/usr/local/myapp/build -it -d openjdk:17-slim-bullseye /bin/bash
       - name: Copy the source code into the container.
         run: docker cp . ci:/usr/local/myapp
       - name: Run the build command.

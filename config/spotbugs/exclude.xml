@@ -6,4 +6,9 @@
     <Match>
         <Bug pattern="VA_FORMAT_STRING_USES_NEWLINE" />
     </Match>
+
+    <!-- Exclude generated files from Antlr -->
+    <Match>
+        <Package name="~.*generated.*"/>
+    </Match>
 </FindBugsFilter>
