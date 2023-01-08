@@ -1,8 +1,9 @@
 # Condition
 
-Users can write conditional statements like this:
+You can write conditional statements like this:
 ```yoi
-user, do you have apple?
+condition, do depending on yes or no
+  question: user, do you have apple?
   yes: user, eat apple
   no: user, buy apple
 ```
@@ -16,12 +17,21 @@ if (user.doYouHaveApple()) {
 }
 ```
 
+The question mark is just for natural readability.
+The actual method name is `do you have apple`.
+
+The type or `yes` and `no` parameters are `method without return`.
+It's similar to lambda parameters in Java.
+The actual computation of `eat apple` or `buy apple` won't occur immediately.
+Only one of them will be called. 
+
 ---
 
 Here is another example:
 ```yoi
-user, do you have the item?
-  item: "apple"
+condition, do depending on yes or no
+  question: user, do you have the item?
+    item: "apple"
   yes: user, eat apple
   no: user, buy apple
 ```
@@ -37,29 +47,27 @@ if (user.doYouHaveTheItem("apple")) {
 
 ## Multiple Conditions
 
-Users can have multiple conditions like this:
+You can have multiple conditions like this:
 ```yoi
-user 1, do you have apple?
-and do you have banana?
-or user 2, do you have orange?
-  yes:
-    user 1, eat your fruit
-    user 2, eat your fruit
-  no: user 3, buy fruits 
+conditions, do depending on yes or no
+  and conditions: [
+    user 1, do you have apple?
+    user 2, do you have banana?
+  ]
+  or conditions: [
+    user 3, do you have money?
+  ]
+  yes: user 3, start party
+  no: user 3, cancel party 
 ```
 
 The above is the same as the following in Java:
 ```java
-if (user1.doYouHaveApple && user1.doYouHaveBanana || user2.doYouHaveOrange) {
-    user1.eatYourFruit();
-    user2.eatYourFruit();
+if (user1.doYouHaveApple && user2.doYouHaveBanana || user3.doYouHaveMoney) {
+    user3.startParty();
 } else {
-    user3.buyFruits();
+    user3.cancelParty();
 }
 ```
 
-Here are the important notes:
-1. There is no `not` operator.
-2. It's either `if` or `else`.
-3. Users can omit the object name if it's used consecutively.
-4. `and` must comes before `or`.
+Note that `conditions` (plural) object is used instead of `condition` (singular).
